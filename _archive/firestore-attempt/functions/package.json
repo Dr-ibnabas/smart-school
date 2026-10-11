@@ -1,0 +1,28 @@
+{
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^11.10.1",
+    "firebase-functions": "^4.4.1",
+    "genkit": "^0.5.17",
+    "@genkit-ai/ai": "^0.5.17",
+    "@genkit-ai/googleai": "^0.5.17",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}

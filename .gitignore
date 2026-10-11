@@ -1,0 +1,49 @@
+# ===== Build & deploy artifacts =====
+.vercel
+**/dist
+**/build
+**/.next
+
+# ===== Dependencies =====
+**/node_modules
+
+# ===== Env / secrets =====
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# ===== Logs =====
+*.log
+logs/
+npm-debug.log*
+
+# ===== IDE / OS =====
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.claude/
+
+# ===== Backend uploads (artefacts utilisateur, pas du code) =====
+backend/uploads/
+
+# ===== Sorties de scripts de test ad hoc =====
+models_list.txt
+quota_result.txt
+backend/resolution.txt
+backend/dist/
+
+# ===== Artefacts Vite / Firebase résiduels =====
+**/vite.config.ts.timestamp-*.mjs
+**/.firebase/
+**/.firebaserc
+**/build.log
+
+# ===== Archives internes =====
+# Le dossier _archive contient l'ancien code Firebase conservé pour
+# référence historique — pas indispensable au build.
+# Décommenter si tu veux l'exclure complètement du repo :
+# _archive/

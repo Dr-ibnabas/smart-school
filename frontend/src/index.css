@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette ----------------------------------------------------------- */
+  --color-primary: #1e40af;        /* indigo-700 plus profond */
+  --color-primary-light: #3b82f6;  /* blue-500 */
+  --color-secondary: #0f172a;      /* slate-900 */
+  --color-background: #f8fafc;     /* slate-50 */
+  --color-success: #059669;        /* emerald-600 */
+  --color-error: #dc2626;          /* red-600 */
+  --color-warning: #d97706;        /* amber-600 */
+
+  /* Ombres ------------------------------------------------------------ */
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 8px 16px -4px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-slate-900 font-sans antialiased;
+    margin: 0;
+    min-height: 100vh;
+  }
+  h1, h2, h3, h4, h5 { @apply tracking-tight; }
+}
+
+/* ============================================================
+ * Composants de design réutilisables
+ * — préférer ces classes aux variantes massives Tailwind inline.
+ * ==========================================================*/
+@layer components {
+  /* Surfaces ---------------------------------------------------------- */
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-sm;
+  }
+
+  .glass-dark {
+    @apply bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 shadow;
+  }
+
+  .surface {
+    @apply bg-white rounded-2xl border border-slate-100 shadow-sm;
+  }
+
+  .surface-hover {
+    @apply transition-shadow duration-200 hover:shadow-md;
+  }
+
+  /* Boutons standardisés --------------------------------------------- */
+  /* Variante "base" : aplatissement obligatoire en Tailwind v4
+     (impossible de @apply une classe custom à l'intérieur d'une autre
+     @layer components — la classe doit lister toutes ses utilities). */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl
+           font-semibold text-sm transition-colors active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed
+           bg-primary text-white hover:bg-primary-light shadow-md shadow-primary/20;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl
+           font-semibold text-sm transition-colors active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed
+           bg-white text-slate-700 border border-slate-200 hover:bg-slate-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl
+           font-semibold text-sm transition-colors active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed
+           text-slate-600 hover:bg-slate-100;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl
+           font-semibold text-sm transition-colors active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed
+           bg-red-50 text-red-600 border border-red-100
+           hover:bg-red-500 hover:text-white hover:border-red-500;
+  }
+  .btn-icon {
+    @apply w-8 h-8 inline-flex items-center justify-center rounded-lg shadow-sm border transition-colors;
+  }
+
+  /* Inputs ------------------------------------------------------------ */
+  .input {
+    @apply w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl
+           text-sm text-slate-900 placeholder:text-slate-400
+           outline-none focus:ring-2 focus:ring-primary/15 focus:border-primary/40
+           transition-all;
+  }
+
+  /* Cartes statistiques ----------------------------------------------- */
+  .stat-card {
+    @apply bg-white rounded-2xl border border-slate-100 shadow-sm
+           transition-shadow duration-200 hover:shadow-md p-5;
+  }
+
+  /* Headers de page --------------------------------------------------- */
+  .page-title {
+    @apply text-2xl md:text-3xl font-bold text-slate-900 tracking-tight flex items-center;
+  }
+  .page-title-icon {
+    @apply w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mr-3 shadow-inner;
+  }
+  .page-subtitle {
+    @apply text-sm text-slate-500;
+  }
+
+  /* Modales ---------------------------------------------------------- */
+  .modal-backdrop {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm;
+  }
+  .modal-panel {
+    @apply bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-100 overflow-hidden;
+  }
+  .modal-header {
+    @apply px-6 py-5 border-b border-slate-100 flex items-center justify-between;
+  }
+  .modal-body {
+    @apply p-6 space-y-4;
+  }
+  .modal-footer {
+    @apply px-6 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-end gap-2;
+  }
+  .modal-close {
+    @apply w-8 h-8 inline-flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors;
+  }
+
+  /* Badges ------------------------------------------------------------ */
+  .badge-primary { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold border bg-primary/5 text-primary border-primary/15; }
+  .badge-success { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold border bg-emerald-50 text-emerald-700 border-emerald-100; }
+  .badge-warning { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold border bg-amber-50 text-amber-700 border-amber-100; }
+  .badge-danger  { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold border bg-red-50 text-red-700 border-red-100; }
+  .badge-neutral { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold border bg-slate-50 text-slate-700 border-slate-200; }
+
+  /* Tables ------------------------------------------------------------ */
+  .table-head {
+    @apply text-slate-400 text-[10px] font-bold uppercase tracking-widest;
+  }
+}
+
+/* Animations ---------------------------------------------------------- */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out;
+}
+
+/* Scrollbar custom ---------------------------------------------------- */
+.custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { @apply bg-transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors; }
+
+/* ============================================================
+ * Dark mode — règles minimales, activées par .dark sur <html>
+ * Pour étendre : ajouter d'autres règles ici.
+ * ==========================================================*/
+html.dark {
+  --color-background: #0f172a;
+  --color-secondary:  #f8fafc;
+}
+html.dark body {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+html.dark .surface { background-color: #1e293b; border-color: #334155; }
+html.dark .glass   { background-color: rgba(30, 41, 59, 0.7); border-color: rgba(255, 255, 255, 0.1); }
+html.dark .input   { background-color: #1e293b; border-color: #334155; color: #f1f5f9; }
+html.dark .input::placeholder { color: #64748b; }
+html.dark .btn-secondary { background-color: #1e293b; color: #cbd5e1; border-color: #334155; }
+html.dark .btn-secondary:hover { background-color: #334155; }
+html.dark .btn-ghost { color: #cbd5e1; }
+html.dark .btn-ghost:hover { background-color: #1e293b; }
+html.dark .table-head { color: #64748b; }
+html.dark .modal-panel { background-color: #1e293b; border-color: #334155; color: #f1f5f9; }
+html.dark .modal-header { border-color: #334155; }
+html.dark .modal-footer { background-color: rgba(15, 23, 42, 0.4); border-color: #334155; }
+html.dark .stat-card { background-color: #1e293b; border-color: #334155; }
+html.dark hr,
+html.dark .border-slate-100 { border-color: #334155 !important; }
+html.dark .text-slate-900 { color: #f1f5f9 !important; }
+html.dark .text-slate-800 { color: #e2e8f0 !important; }
+html.dark .text-slate-700 { color: #cbd5e1 !important; }
+html.dark .bg-white { background-color: #1e293b !important; }
+html.dark .bg-slate-50 { background-color: #0f172a !important; }
+html.dark .bg-slate-100 { background-color: #1e293b !important; }
